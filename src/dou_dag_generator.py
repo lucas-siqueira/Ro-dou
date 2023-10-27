@@ -127,7 +127,7 @@ class DouDigestDagGenerator():
         # DAG parameters
         default_args = {
             'owner': specs.owner,
-            'start_date': datetime(2021, 10, 18),
+            'start_date': datetime(2023, 10, 25),
             'depends_on_past': False,
             'retries': 10,
             'retry_delay': timedelta(minutes=20),
@@ -142,7 +142,7 @@ class DouDigestDagGenerator():
             doc_md=doc_md,
             catchup=False,
             params={
-                "trigger_date": "2022-01-02T12:00"
+                "trigger_date": "2023-10-25T12:00"
             },
             tags=specs.dag_tags
             )

@@ -27,6 +27,7 @@ class DAGConfig:
     emails: List[str]
     subject: str
     attach_csv: bool
+    attach_pdf: bool
     discord_webhook: str
     slack_webhook: str
     schedule: str
@@ -120,9 +121,10 @@ class YAMLParser(FileParser):
         dag_tags.append('dou')
         dag_tags.append('generated_dag')
         skip_null = report.get('skip_null', True)
-        emails = report.get('emails')
+        emails = self._get_emails_params(report)
         subject = report.get('subject', 'Extraçao do DOU')
         attach_csv = report.get('attach_csv', False)
+        attach_pdf = report.get('attach_pdf', False)
 
         return DAGConfig(
             dag_id=dag_id,
@@ -140,6 +142,7 @@ class YAMLParser(FileParser):
             emails=emails,
             subject=subject,
             attach_csv=attach_csv,
+            attach_pdf=attach_pdf,
             discord_webhook=discord_webhook,
             slack_webhook=slack_webhook,
             schedule=schedule,
@@ -149,6 +152,24 @@ class YAMLParser(FileParser):
             dag_tags=set(dag_tags),
             owner=owner,
             )
+
+    def _get_emails_params(self, report) -> List[str]:
+        """Parses the `terms` config property handling different options.
+        """
+        emails = report.get('emails')
+        if isinstance(emails, dict):
+            if 'from_airflow_variable' in emails:
+                var_value = Variable.get(emails.get('from_airflow_variable'))
+                try:
+                    emails = ast.literal_eval(var_value)
+                except (ValueError, SyntaxError):
+                    emails = var_value.splitlines()
+            else:
+                raise ValueError(
+                    'O campo `terms` aceita como valores válidos '
+                    'uma lista de strings ou parâmetros do tipo '
+                    '`from_airflow_variable` ou `from_db_select`.')
+        return emails
 
     def _get_terms_params(self, search) -> Tuple[List[str], str, str]:
         """Parses the `terms` config property handling different options.

@@ -149,10 +149,11 @@ dag:
       - dest1@economia.gov.br
       - dest2@economia.gov.br
     attach_csv: True
+    attach_pdf: True
     subject: Assunto do Email
 ```
 Note que aqui são utilizados os parâmetros opcionais `schedule`,
-`dou_section` e `attach_csv`.
+`dou_section`, `attach_csv`e `attach_pdf`.
 
 ### Exemplo 3
 Neste caso é utilizado o parâmetro `from_db_select` em `terms` que torna
@@ -246,6 +247,7 @@ dag:
     emails:
       - destination@economia.gov.br
     attach_csv: True
+    attach_pdf: True
     subject: "Teste do Ro-dou"
 ```
 

@@ -61,7 +61,7 @@ def test_convert_report_to_dataframe__cols_grouped_report(email_sender, report_e
 
 def test_get_csv_tempfile__valid_file_name_preffix(email_sender):
     with email_sender.get_csv_tempfile() as csv_file:
-        assert csv_file.name.split('/')[-1].startswith('extracao_dou_')
+        assert csv_file.name.split('/')[-1].startswith('extracao_')
 
 def test_get_csv_tempfile__valid_file_name_suffix(email_sender):
     with email_sender.get_csv_tempfile() as csv_file:
@@ -70,6 +70,18 @@ def test_get_csv_tempfile__valid_file_name_suffix(email_sender):
 def test_get_csv_tempfile__valid_csv(email_sender):
     with email_sender.get_csv_tempfile() as csv_file:
         assert pd.read_csv(csv_file.name) is not None
+
+def test_get_pdf_tempfile__valid_file_name_preffix(email_sender):
+    with email_sender.get_pdf_tempfile() as pdf_file:
+        assert pdf_file.name.split('/')[-1].startswith('extracao_')
+
+def test_get_pdf_tempfile__valid_file_name_suffix(email_sender):
+    with email_sender.get_pdf_tempfile() as pdf_file:
+        assert pdf_file.name.endswith('.pdf')
+
+def test_get_pdf_tempfile__valid_pdf(email_sender):
+    with email_sender.get_pdf_tempfile() as pdf_file:
+        assert pd.read_pdf(pdf_file.name) is not None
 
 def test_merge_results(merge_results_samples):
     merged_result = merge_results(

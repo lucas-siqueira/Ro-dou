@@ -197,7 +197,7 @@ class DOUSearcher(BaseSearcher):
                     field=field,
                     is_exact_search=is_exact_search,
                     )
-            except:
+            except Exception as e:
                 if retry > max_retries:
                     logging.error('Error - Max retries reached')
                     raise Exception

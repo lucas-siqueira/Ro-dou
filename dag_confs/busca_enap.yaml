@@ -1,0 +1,14 @@
+dag:
+  id: busca_enap
+  description: DAG de exemplo com pesquisas para enap
+  search:
+    date: DIA
+    terms:
+      - Enap
+  report:
+    emails:
+      from_airflow_variable: emails
+    attach_csv: On
+    attach_pdf: On
+    subject: "Buscdocker as no diario no sei e no boletim sobre a enap"
+

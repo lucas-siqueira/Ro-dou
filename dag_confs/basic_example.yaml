@@ -2,6 +2,7 @@ dag:
   id: basic_example
   description: DAG de teste
   search:
+    date: MES
     terms:
     - dados abertos
     - governo aberto

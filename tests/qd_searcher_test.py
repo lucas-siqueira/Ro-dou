@@ -63,8 +63,8 @@ def test_parse_result_qd(result_as_email: bool, expected: str):
 def test_build_query_payload(pre_tags: str,
                              post_tags: str):
     payload = _build_query_payload(
-        search_term='paralelepípedo',
-        reference_date=datetime(2023, 2, 9),
+        search_term='enap',
+        reference_date=datetime(2023, 10, 18),
     )
     expected = [
         ('size', 100),
@@ -73,9 +73,9 @@ def test_build_query_payload(pre_tags: str,
         ('pre_tags', pre_tags),
         ('post_tags', post_tags),
         ('number_of_excerpts', 3),
-        ('published_since', '2023-02-09'),
-        ('published_until', '2023-02-09'),
-        ('querystring', '"paralelepípedo"')
+        ('published_since', '2023-10-18'),
+        ('published_until', '2023-10-18'),
+        ('querystring', '"enap"')
     ]
 
     assert payload == expected
