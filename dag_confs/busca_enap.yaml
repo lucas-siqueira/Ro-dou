@@ -8,7 +8,7 @@ dag:
   report:
     emails:
       from_airflow_variable: emails
-    attach_csv: On
+#    attach_csv: On
     attach_pdf: On
     subject: "Buscdocker as no diario no sei e no boletim sobre a enap"
 

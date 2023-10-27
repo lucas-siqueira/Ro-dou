@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import json
 from datetime import datetime
 from tempfile import NamedTemporaryFile
 
@@ -95,23 +96,29 @@ class EmailSender(ISender):
                 return 'skip_notification'
             content = "Nenhum dos termos pesquisados foi encontrado."
 
-
-        if (self.specs.attach_csv or self.specs.attach_pdf) and items:
+        if self.specs.attach_csv and items:
             files = []
-            if self.specs.attach_csv and items:
-                with self.get_csv_tempfile() as csv_file:
-                    files.append(csv_file.name)
+            with self.get_csv_tempfile() as csv_file:
+                files.append(csv_file.name)
+                send_email(
+                    to=self.specs.emails,
+                    subject=full_subject,
+                    files=files,
+                    html_content=content,
+                    mime_charset='utf-8')
 
-            if self.specs.attach_pdf and items:
-                with self.get_pdf_tempfile() as pdf_file:
-                    files.append(pdf_file.name)
-            send_email(
-                to=self.specs.emails,
-                subject=full_subject,
-                files=files,
-                html_content=content,
-                mime_charset='utf-8')
-        else:
+        if self.specs.attach_pdf and items:
+            files = []
+            with self.get_pdf_tempfile() as pdf_file:
+                files.append(pdf_file.name)
+                send_email(
+                    to=self.specs.emails,
+                    subject=full_subject,
+                    files=files,
+                    html_content=content,
+                    mime_charset='utf-8')
+
+        if not((self.specs.attach_csv or self.specs.attach_pdf) and items):
             send_email(
                 to=self.specs.emails,
                 subject=full_subject,
