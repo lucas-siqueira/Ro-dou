@@ -138,3 +138,8 @@ test_notrack/
 **/.DS_Store
 dags/airflow-mantainance/db-bkp
 **/mnt/pgdata/
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/Ro-dou.iml
+/.idea/vcs.xml
