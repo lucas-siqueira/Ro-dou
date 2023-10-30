@@ -4,7 +4,7 @@ dag:
   search:
     date: DIA
     terms:
-      - Enap
+      from_airflow_variable: termos_variavel
   report:
     emails:
       from_airflow_variable: emails_variavel
