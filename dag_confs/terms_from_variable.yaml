@@ -4,7 +4,7 @@ dag:
   search:
     date: SEMANA
     terms:
-      from_airflow_variable: termos_exemplo_variavel
+      from_airflow_variable: termos_variavel
   report:
     emails:
       - destination@economia.gov.br
